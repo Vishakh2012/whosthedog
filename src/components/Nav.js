@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
 const Nav = () => {
     return ( 
-        <nav className = "bg-black flex">
+        <nav className = "bg-black h-10 flex">
             
             <div className = "text-cyan-200 flex-1 text-center">
                 <Link to = "/">
-                    Play again
+                    Play
                 </Link>
             </div >
             <div className = "text-cyan-200 flex-1 text-center">
@@ -14,7 +14,7 @@ const Nav = () => {
                 </Link>
             </div>
             <div className = "text-cyan-200 flex-1 text-center">
-                <Link to = "#">
+                <Link to = "settings">
                     Settings
                 </Link>
             </div>
