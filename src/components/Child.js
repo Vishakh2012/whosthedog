@@ -6,4 +6,4 @@ const Child = () => {
      );
 }
  
-export default Child;
+export default Child;//
