@@ -1,31 +1,37 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import dogImg from "../src/assets/gd.jpeg"
-const Play = () => {
+const Play =  () => {
+  const [Model, setModel] = useState(null);
     useEffect(() => {
       
+      const fetchTfnMn = async () => {
     //adding tensorflow-js
       const sptTf = document.createElement('script');
       sptTf.src = "https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.1";
-
-    //adding mobilenet - an image classification model
+      sptTf.onload = async () => {
+          //adding mobilenet - an image classification model
+        
         const sptMn = document.createElement('script');
         sptMn.src = "https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@1.0.0"
+        sptMn.onload = async () => 
+        {
+          const model = await window.mobilenet.load()
+          await setModel(model);
+        }
+        document.body.appendChild(sptMn);
+      }
+    
         
     //adding the elements to the document
         document.body.appendChild(sptTf);
-        document.body.appendChild(sptMn);
-    
-    //get the image and pass it to 
-      return () => {
-        document.body.removeChild(sptTf);
-        document.body.removeChild(sptMn)
+        
       }
+    fetchTfnMn();
     }, [])
 
     const  checkImage =  async () => {
       const imag = document.getElementsByTagName('img');
-      const model = await window.mobilenet.load()
-      const pred = await model.classify(imag)
+      const pred = await Model.classify(imag[0])
       console.log(pred);
       
     }
