@@ -32,7 +32,7 @@ const Play =  () => {
     const  checkImage =  async () => {
       const imag = document.getElementsByTagName('img');
       const pred = await Model.classify(imag[0])
-      console.log(pred);
+      console.log(pred[0].className);
       
     }
 
@@ -42,7 +42,7 @@ const Play =  () => {
 
             <img id = "image" src={ dogImg } alt="recognition question " className="mx-auto my-auto"/>
             <div className="mb-56 w-screen mx-2 flex justify-center flex-col">
-            <input type="text" className="bg-cyan-200 rounded-md flex mx-auto w-1/2 p-2" placeholder="enter the breed" />
+            <input type="text" className="bg-cyan-200 rounded-full flex mx-auto w-1/2 py-2 px-4" placeholder="enter the breed" />
             <button onClick = {() => {checkImage();}} className = "bg-cyan-700 hover:bg-cyan-500 hover:text-white mt-4 mx-auto p-4 rounded-full w-56" >submit</button>
             </div>
         </div >

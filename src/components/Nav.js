@@ -4,7 +4,7 @@ const Nav = () => {
         <nav className = "bg-black h-10 flex">
             
             <div className = "text-cyan-200 flex-1 text-center">
-                <Link to = "/">
+                <Link to = "Play">
                     Play
                 </Link>
             </div >
