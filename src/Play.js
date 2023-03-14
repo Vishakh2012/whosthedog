@@ -2,6 +2,23 @@ import { useEffect, useState } from "react";
 import dogImg from "../src/assets/gd.jpeg"
 const Play =  () => {
   const [Model, setModel] = useState(null);
+  const [Guess, setGuess] = useState("");
+  const [ans, setAns] = useState("");
+
+  const  checkImage =  async () => {
+      const imag = document.getElementsByTagName('img');
+      const pred = await Model.classify(imag[0])
+      const arrAns = pred[0].className.split(",")
+      if (arrAns[0].toUpperCase() === ans.toUpperCase())
+      {
+        console.log( ans +" is correct")
+      }
+      else
+      {
+        console.log( ans + " is incorrect");
+      }
+      
+    }
     useEffect(() => {
       
       const fetchTfnMn = async () => {
@@ -29,22 +46,30 @@ const Play =  () => {
     fetchTfnMn();
     }, [])
 
-    const  checkImage =  async () => {
-      const imag = document.getElementsByTagName('img');
-      const pred = await Model.classify(imag[0])
-      console.log(pred[0].className);
+    useEffect(() => {
+      checkImage();
+    }, [Guess,checkImage]);
+
+    const handleSubmit = async (e) => 
+    {
+      e.preventDefault();
+      setAns(Guess);
       
+
     }
+
+    
 
     
     return ( 
         <div className="bg-black h-screen flex justify-center  items-center flex-col">
 
             <img id = "image" src={ dogImg } alt="recognition question " className="mx-auto my-auto"/>
-            <div className="mb-56 w-screen mx-2 flex justify-center flex-col">
-            <input type="text" className="bg-cyan-200 rounded-full flex mx-auto w-1/2 py-2 px-4" placeholder="enter the breed" />
-            <button onClick = {() => {checkImage();}} className = "bg-cyan-700 hover:bg-cyan-500 hover:text-white mt-4 mx-auto p-4 rounded-full w-56" >submit</button>
-            </div>
+              <form className="w-screen mb-56 mx-2 flex justify-center flex-col" onSubmit={ async (e) => {await handleSubmit(e); checkImage() } }>
+            <input type="text" className="bg-cyan-200 rounded-full flex mx-auto w-1/2 py-2 px-4" placeholder="enter the breed" value = { Guess } onChange = {(e) => {setGuess(e.target.value); }}/>
+            <button  className = "bg-cyan-700 hover:bg-cyan-500 hover:text-white mt-4 mx-auto p-4 rounded-full w-56" >submit</button>
+            </form>
+            
         </div >
 
      );
