@@ -40,9 +40,13 @@ To get started with Who'sTheDog, follow these steps:
 
 6. **Contributing to the game**
    Welcoming contributions to enhance and improve Who'sTheDog. If you'd like to contribute, please follow these guidelines:
+   
    Fork the repository and create a new branch for your feature or bug fix.
+
    Make your changes, and ensure that your code follows the project's coding standards.
+
    Write tests for your code if applicable.
+
    Open a pull request, describing the changes you've made and why they are necessary.
 
    
